@@ -11,18 +11,19 @@ async def start_server():
     ipython for test
     '''
     clients = []
-    for i in range(200):
+    # ulimit -n 4096 , 247
+    for i in range(1000):
         client = socketio.AsyncClient()
+        await asyncio.sleep(1/500)
+        await client.connect('http://localhost:8080')
         clients.append(client)
-        await asyncio.sleep(1/50)
-        await clients[i].connect('http://localhost:8080')
 
     logger.debug(f"clients count {len(clients)}")
-    await asyncio.sleep(5)
+    await asyncio.sleep(3)
 
     for client in clients:
         await client.disconnect()
-        await asyncio.sleep(1/50)
+        await asyncio.sleep(1/500)
     
     await asyncio.sleep(1)
 

@@ -2,6 +2,7 @@ from aiohttp import web
 import socketio
 from loguru import logger
 
+# ulimit -n 4096
 
 sio = socketio.AsyncServer(async_mode='aiohttp')
 # sio = socketio.AsyncServer()
